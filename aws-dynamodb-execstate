@@ -1,0 +1,13 @@
+import boto3
+from __future__ import print_function
+
+db = boto3.client('dynamodb')
+
+def lambda_handler(event, context):
+        for record in event['Records']:
+            print("Executing statement:")
+            statement = record["body"]["statement"]
+            print(str(statement))
+            query = db.execute_statement(
+                    Statement=statement
+                    )
